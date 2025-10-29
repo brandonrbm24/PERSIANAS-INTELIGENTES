@@ -65,31 +65,6 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 ---
 
-## 📁 Estructura del Repositorio
-
-Sistema-de-Control-de-Persianas-Inteligentes/
-│
-├── Aplicacion/
-│   ├── main.c
-│   ├── conexion_adafruit.c
-│   ├── control_motor.c
-│   └── sensor_luz.c
-│
-├── Documentos/
-│   ├── Analisis/
-│   │   ├── CasosDeUso.pdf
-│   │   ├── DiagramaDeClases.drawio
-│   │   ├── DiagramaDeCasosDeUso.drawio
-│   │   └── HistoriasDeUsuario.pdf
-│   ├── Pruebas/
-│   │   └── InformePruebas.pdf
-│   └── Reportes/
-│       └── ActaDeInicio.pdf
-│
-└── README.md
-
----
-
 ## 🚀 Tecnologías y Herramientas
 
 | Tipo | Tecnología / Herramienta |
