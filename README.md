@@ -36,7 +36,7 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 | Nombre | Rol | Responsabilidad |
 |--------|------|----------------|
-| **María Daniela Jiménez** | Líder del Proyecto | Coordinación general, documentación y seguimiento de entregas. |
+| **María Daniela Jiménez** | Líder del Proyecto (PO) | Coordinación general, documentación y seguimiento de entregas. |
 | **Katherine Cardona** | Diseñadora / Documentación | Diseño de diagramas UML y elaboración de documentos técnicos. |
 | **Brandon Bueno** | Programador IoT | Desarrollo del código en ESP32, integración con Adafruit IO. |
 | **Juan José Osorio** | Encargado de Pruebas | Montaje físico, validación y pruebas funcionales. |
@@ -65,4 +65,142 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 ---
 
+## 📁 Estructura del Repositorio
 
+Sistema-de-Control-de-Persianas-Inteligentes/
+│
+├── Aplicacion/
+│   ├── main.c
+│   ├── conexion_adafruit.c
+│   ├── control_motor.c
+│   └── sensor_luz.c
+│
+├── Documentos/
+│   ├── Analisis/
+│   │   ├── CasosDeUso.pdf
+│   │   ├── DiagramaDeClases.drawio
+│   │   ├── DiagramaDeCasosDeUso.drawio
+│   │   └── HistoriasDeUsuario.pdf
+│   ├── Pruebas/
+│   │   └── InformePruebas.pdf
+│   └── Reportes/
+│       └── ActaDeInicio.pdf
+│
+└── README.md
+
+---
+
+## 🚀 Tecnologías y Herramientas
+
+| Tipo | Tecnología / Herramienta |
+|------|--------------------------|
+| Microcontrolador | ESP32 |
+| Lenguaje de programación | C (PlatformIO / Visual Studio Code) |
+| IDE | Visual Studio Code con extensión PlatformIO |
+| Comunicación IoT | MQTT - Adafruit IO |
+| Sensor | LDR (sensor de luz) |
+| Actuador | Motor DC + módulo de control |
+| Control manual | Botones físicos |
+| Control remoto | Dashboard en Adafruit IO |
+| Control de versiones | Git / GitHub |
+| Diagramas | Draw.io / Lucidchart |
+| Documentación | Markdown / PDF |
+
+---
+
+## 📜 Historias de Usuario Iniciales
+
+**HU-01:**  
+> *Como usuario, quiero abrir las persianas manualmente desde el panel web, para controlar la iluminación sin depender del modo automático.*
+
+**HU-02:**  
+> *Como usuario, quiero que las persianas se cierren automáticamente cuando haya poca luz, para mantener privacidad y confort.*
+
+**HU-03:**  
+> *Como administrador, quiero visualizar el estado actual de las persianas y el nivel de luz, para monitorear el sistema.*
+
+**HU-04:**  
+> *Como usuario, quiero programar horarios de apertura y cierre, para automatizar el control diario de las persianas.*
+
+**HU-05:**  
+> *Como usuario, quiero recibir notificaciones si hay un fallo en el sensor o motor, para poder intervenir rápidamente.*
+
+---
+
+## ⚙️ Roles del Equipo según Metodología Scrum
+
+| Rol | Nombre | Funciones |
+|------|--------|-----------|
+| 🧭 **Product Owner (PO)** | María Daniela Jiménez | Define los requerimientos, valida entregas y coordina el equipo. |
+| ⚙️ **Scrum Master (SM)** | Katherine Cardona | Facilita reuniones, garantiza cumplimiento de metodología. |
+| 💻 **Development Team (Dev Team)** | Brandon Bueno y Juan José Osorio | Desarrollan, prueban y documentan el sistema físico y lógico. |
+
+---
+
+## ✅ Definition of Ready (DoR)
+
+Una historia está **lista para desarrollarse** cuando:
+- Tiene una descripción clara (formato “Como [rol], quiero [acción], para [beneficio]”).
+- Se han definido los criterios de aceptación.
+- Está priorizada en el tablero del proyecto.
+- No depende de otra historia pendiente.
+
+---
+
+## 🧩 Definition of Done (DoD)
+
+Una historia está **completamente terminada** cuando:
+- El código ha sido implementado y probado en el ESP32.
+- La funcionalidad está verificada en Adafruit IO.
+- El commit y push fueron realizados correctamente.
+- La documentación se actualizó en.........
+- El equipo aprobó la historia en revisión.
+
+---
+
+## 🧱 Estructura de Issues y Tareas del Proyecto
+
+**Fase 1: Análisis y Diseño**
+- TASK-01: Identificación de requerimientos
+- TASK-02: Elaboración de casos de uso
+- TASK-03: Diseño del diagrama de clases
+- TASK-04: Documentación inicial del proyecto
+
+**Fase 2: Desarrollo del Sistema**
+- HU-01: Control manual desde Adafruit IO  
+- HU-02: Control automático por sensor de luz  
+- HU-03: Notificación de fallos  
+- TECH-01: Programación del ESP32  
+- TECH-02: Integración con Adafruit IO  
+- TECH-03: Comunicación MQTT  
+
+**Fase 3: Pruebas y Entrega**
+- TEST-01: Pruebas de hardware  
+- TEST-02: Validación de conexión IoT  
+- TEST-03: Ajustes finales y presentación  
+
+---
+
+## 🔗 Enlaces Importantes
+
+- 📘 **Acta de inicio:** `/Documentos/Reportes/ActaDeInicio.pdf`  
+- 🧩 **Casos de Uso:** `/Documentos/Analisis/CasosDeUso.pdf`  
+- 🧠 **Diagrama de Clases:** `/Documentos/Analisis/DiagramaDeClases.drawio`  
+- 🔌 **Código Fuente:** `/Aplicacion/`  
+- 🧾 **Historias de Usuario:** `/Documentos/Analisis/HistoriasDeUsuario.pdf`
+
+---
+
+## 📈 Estado Actual del Proyecto
+🟢 *On Track*  
+> El proyecto se encuentra en fase de **desarrollo del código y conexión IoT**, con avance continuo en los diagramas, documentación y despues pruebas iniciales del prototipo físico.
+
+---
+
+## 🧾 Licencia
+Este proyecto es de uso académico. Universidad del Valle – Asignatura: *Metodologías de Desarrollo de Software.*
+
+---
+
+**Universidad del Valle – 2025**  
+👩‍💻 *Proyecto desarrollado por el equipo de Sistema de Control de Persianas Inteligentes.*
