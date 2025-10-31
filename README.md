@@ -174,7 +174,7 @@ Una historia está **completamente terminada** cuando:
 ---
 
 ## 🧾 Licencia
-Este proyecto es de uso académico. Universidad del Valle – Asignatura: *Metodologías de Desarrollo de Software.*
+Este proyecto es de uso académico. Universidad del Valle – Asignatura: *Metodologías de Desarrollo de Software..*
 
 ---
 
