@@ -36,10 +36,10 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 | Nombre | Rol | Responsabilidad |
 |--------|------|----------------|
-| **María Daniela Jiménez** | Líder del Proyecto (PO) | Coordinación general, documentación y seguimiento de entregas. |
-| **Katherine Cardona** | Diseñadora / Documentación | Diseño de diagramas UML y elaboración de documentos técnicos. |
+| **María Daniela Jiménez** | Líder del Proyecto (PO) / Encargado de Pruebas  | Coordinación general, documentación, validación y pruebas funcionales y seguimiento de entregas. |
+| **Katherine Cardona** | Diseñadora / Encargado de Pruebas| Diseño de diagramas UML y Montaje físico, validación y pruebas funcionales |
 | **Brandon Bueno** | Programador IoT | Desarrollo del código en ESP32, integración con Adafruit IO. |
-| **Juan José Osorio** | Encargado de Pruebas | Montaje físico, validación y pruebas funcionales. |
+| **Juan José Osorio** | Documentación  | elaboración de documentos técnicos. |
 
 ---
 
