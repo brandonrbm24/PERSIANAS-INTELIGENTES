@@ -18,7 +18,7 @@ El sistema está diseñado para permitir el **control de persianas** bajo tres m
 A través del **ESP32**, el sistema lee un **sensor LDR** para identificar cambios significativos de luz ambiental y ejecutar la acción correspondiente:
 - **Amanecer (mucha luz)** → abrir persiana  
 - **Anochecer (muy poca luz)** → cerrar persiana  
-
+ 
 Para garantizar seguridad, el recorrido se limita con **dos finales de carrera (normalmente abiertos)**:
 - Tope superior
 - Tope inferior
@@ -90,8 +90,7 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 | LDR (analógico) | GPIO 34 |
 
 📎 Esquemático y conexiones:  
-- `diagrams/esquematico.png`  
-- `diagrams/conexiones.png`  
+-   <img width="852" height="537" alt="Captura de pantalla 2025-12-11 173003" src="https://github.com/user-attachments/assets/a42ef72b-df4b-4bf8-ad19-f1a3a927279e" />
 
 ---
 
