@@ -107,7 +107,9 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 📸 Evidencias:
 - ![WhatsApp Image 2025-12-12 at 9 33 49 AM](https://github.com/user-attachments/assets/552a5360-dbac-4067-86f5-998b2ddfbfbe)
 - ![WhatsApp Image 2025-12-12 at 9 33 48 AM](https://github.com/user-attachments/assets/735a4cec-196a-4b7b-8770-08045836b688)
-- ![WhatsApp Image 2025-12-12 at 9 33 48 AM](https://github.com/user-attachments/assets/7b2260e4-6ed3-4cb7-b98b-a9561fbe6e94)
+-  https://github.com/user-attachments/assets/007c478f-9780-4f24-8cdf-b3a298bc6568
+
+
 
 ### 2️⃣ Control manual
 - Programación del control por botones (SUBIR/BAJAR) con paro por finales de carrera.
