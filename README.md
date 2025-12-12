@@ -105,7 +105,8 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 6. Conectar LDR como divisor de tensión hacia GPIO34.
 
 📸 Evidencias:
-- `media/circuito_pruebas.jpg`
+- ![WhatsApp Image 2025-12-12 at 9 33 49 AM](https://github.com/user-attachments/assets/552a5360-dbac-4067-86f5-998b2ddfbfbe)
+- ![WhatsApp Image 2025-12-12 at 9 33 48 AM](https://github.com/user-attachments/assets/735a4cec-196a-4b7b-8770-08045836b688)
 
 
 ### 2️⃣ Control manual
@@ -132,6 +133,7 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 - Pruebas integrales del sistema completo con montaje final.
 
 📸 Evidencias:
+
 - `media/maqueta.jpg`
 - `media/montaje_final.jpg`
 
