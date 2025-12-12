@@ -1,34 +1,153 @@
 # 🌞 Sistema de Control de Persianas Inteligentes
 
 ¡Bienvenidos al proyecto **Sistema de Control de Persianas Inteligentes**!  
-Este sistema permite **automatizar la apertura y cierre de persianas** mediante sensores de luz y control manual a través de una interfaz web conectada a **Adafruit IO**, integrando el uso del **microcontrolador ESP32**.
+Este sistema permite **automatizar la apertura y cierre de persianas** mediante control **manual**, **remoto (IoT)** y **automático por luz**, integrando el uso del **microcontrolador ESP32** y una interfaz conectada a **Adafruit IO**.
 
-Nuestro objetivo es crear una solución inteligente, eficiente y práctica para el control de iluminación natural en espacios interiores, combinando hardware y software con tecnologías IoT.
+El objetivo es crear una solución **inteligente, práctica y segura** para mejorar el control de iluminación natural en espacios interiores, combinando hardware, software y tecnologías IoT.
 
 ---
 
 ## 🧠 Descripción del Proyecto
 
-El sistema está diseñado para permitir el **control manual y automático de persianas**, gestionando la luz ambiental y el confort del usuario.  
-A través del **ESP32**, el sistema recibe datos de un **sensor LDR**, que mide la intensidad luminosa. Según los valores obtenidos, las persianas se abren o cierran automáticamente.  
-El usuario también puede manejar el sistema de forma manual desde una **interfaz web**, sincronizada con **Adafruit IO**, que permite monitorear el estado y enviar comandos en tiempo real.
+El sistema está diseñado para permitir el **control de persianas** bajo tres modalidades:
+
+- 🔘 **Manual local:** dos botones físicos (SUBIR / BAJAR).  
+- 🌐 **Remoto:** comandos desde un dashboard en **Adafruit IO** (MQTT).  
+- 🌅 **Automático por luz (LDR):** actúa solo en eventos de **amanecer** y **anochecer**.
+
+A través del **ESP32**, el sistema lee un **sensor LDR** para identificar cambios significativos de luz ambiental y ejecutar la acción correspondiente:
+- **Amanecer (mucha luz)** → abrir persiana  
+- **Anochecer (muy poca luz)** → cerrar persiana  
+
+Para garantizar seguridad, el recorrido se limita con **dos finales de carrera (normalmente abiertos)**:
+- Tope superior
+- Tope inferior
+
+✅ **Regla de prioridad del sistema:**  
+1) **Botones físicos** → 2) **Adafruit IO** → 3) **Automático (LDR)**
 
 ---
 
 ## 🎯 Objetivo General
 
-Desarrollar un sistema automatizado de control de persianas basado en **ESP32** con conectividad **IoT (Adafruit IO)**, capaz de funcionar tanto en modo manual como automático, mejorando la eficiencia energética y la comodidad del usuario.
+Desarrollar un sistema automatizado de control de persianas basado en **ESP32** con conectividad **IoT (Adafruit IO)**, capaz de funcionar en modo manual, remoto y automático por luz, mejorando la eficiencia energética y la comodidad del usuario.
 
 ---
 
 ## 🎯 Objetivos Específicos
 
 - Diseñar el hardware del sistema de persianas inteligentes.
-- Implementar sensores de luz (LDR) para detectar la luminosidad ambiental.
-- Programar el control del motor mediante ESP32.
-- Conectar el sistema a Adafruit IO para monitoreo y control remoto.
-- Implementar una interfaz web para visualización y gestión.
-- Documentar el desarrollo del sistema con diagramas, historias de usuario y casos de uso.
+- Implementar el control del motor mediante **L298N** y ESP32.
+- Implementar botones físicos con prioridad sobre otros modos de control.
+- Integrar **LDR** para detección de amanecer/anochecer (sin control continuo).
+- Conectar el sistema a **Adafruit IO** para monitoreo y control remoto.
+- Documentar el desarrollo del sistema con diagramas, evidencias y pruebas.
+
+---
+
+## ✅ Funcionalidades Implementadas
+
+- [x] Control manual con **dos botones** (SUBIR / BAJAR)
+- [x] Protección por **finales de carrera** superior e inferior (NO)
+- [x] Control automático por luz:
+  - [x] Apertura al **amanecer**
+  - [x] Cierre al **anochecer**
+- [x] Control remoto por **Adafruit IO** con comandos:
+  - [x] `UP`
+  - [x] `DOWN`
+  - [x] `STOP`
+- [x] Manejo de prioridades (manual > remoto > automático)
+
+---
+
+## 🧰 Componentes Utilizados
+
+| Componente | Descripción |
+|----------|-------------|
+| ESP32 (30 pines) | Microcontrolador principal |
+| Motor DC con motoreductor | Movimiento de la persiana |
+| L298N | Puente H para control del motor |
+| 2 pulsadores | Control manual (SUBIR/BAJAR) |
+| 2 finales de carrera (NO) | Límite superior e inferior |
+| LDR + resistencia | Sensor de luz |
+| Protoboard | Montaje del circuito |
+| Fuente externa | Alimentación del motor |
+
+---
+
+## 🔌 Conexiones Principales
+
+> 📌 Nota: ESP32 y L298N deben compartir **GND común**.
+
+| Elemento | GPIO ESP32 |
+|-------|-----------|
+| IN1 (L298N) | GPIO 18 |
+| IN2 (L298N) | GPIO 19 |
+| Botón SUBIR | GPIO 25 |
+| Botón BAJAR | GPIO 26 |
+| Final de carrera ARRIBA (NO) | GPIO 32 |
+| Final de carrera ABAJO (NO) | GPIO 33 |
+| LDR (analógico) | GPIO 34 |
+
+📎 Esquemático y conexiones:  
+- `diagrams/esquematico.png`  
+- `diagrams/conexiones.png`  
+
+---
+
+## 🛠️ Implementación Paso a Paso
+
+### 1️⃣ Montaje del hardware (pruebas)
+1. Conectar motor al L298N (OUT1/OUT2).
+2. Alimentar L298N con fuente externa (según el motor).
+3. Conectar GND del L298N con GND del ESP32.
+4. Conectar botones con `INPUT_PULLUP` (a GND).
+5. Conectar finales de carrera (NO) con `INPUT_PULLUP` (a GND).
+6. Conectar LDR como divisor de tensión hacia GPIO34.
+
+📸 Evidencias:
+- `media/circuito_pruebas.jpg`
+- `media/montaje_protoboard.jpg`
+
+### 2️⃣ Control manual
+- Programación del control por botones (SUBIR/BAJAR) con paro por finales de carrera.
+- Verificación de giro del motor y paro al soltar botón.
+
+### 3️⃣ Lógica automática por LDR (solo 2 eventos al día)
+- Lectura ADC del LDR.
+- Definición de umbrales:
+  - Amanecer (mucha luz)
+  - Anochecer (poca luz)
+- Activación por evento (cambio de estado), no control continuo.
+- Si ya está arriba/abajo, no se mueve.
+
+### 4️⃣ Comunicación IoT (Adafruit IO)
+- Conexión WiFi del ESP32.
+- Suscripción al feed `persiana`.
+- Recepción de comandos remotos:
+  - `UP`, `DOWN`, `STOP`
+- Integración con la prioridad del sistema.
+
+### 5️⃣ Pruebas y validación
+- Pruebas individuales por módulos (motor, botones, finales, LDR, IoT).
+- Pruebas integrales del sistema completo con montaje final.
+
+📸 Evidencias:
+- `media/maqueta.jpg`
+- `media/montaje_final.jpg`
+
+---
+
+## 🌐 Adafruit IO
+
+- **Feed de control:** `persiana`
+- **Comandos soportados:**
+  - `UP` → Subir
+  - `DOWN` → Bajar
+  - `STOP` → Parar
+
+📌 Recomendación de dashboard:
+- 3 botones tipo **Momentary Button**: SUBIR / BAJAR / STOP
 
 ---
 
@@ -36,10 +155,10 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 | Nombre | Rol | Responsabilidad |
 |--------|------|----------------|
-| **María Daniela Jiménez** | Líder del Proyecto (PO) / Encargado de Pruebas  | Coordinación general, documentación, validación y pruebas funcionales y seguimiento de entregas. |
-| **Katherine Cardona** | Diseñadora / Encargado de Pruebas| Diseño de diagramas UML y Montaje físico, validación y pruebas funcionales. |
-| **Brandon Bueno** | Programador IoT | Desarrollo del código en ESP32, integración con Adafruit IO. |
-| **Juan José Osorio** | Documentación  | Elaboración de documentos técnicos. |
+| **María Daniela Jiménez** | Líder del Proyecto (PO) / Pruebas | Coordinación general, documentación, validación y pruebas. |
+| **Katherine Cardona** | Scrum Master / Diseño | Diagramas UML, montaje físico y validación. |
+| **Brandon Bueno** | Programador IoT | Desarrollo del código ESP32 e integración Adafruit IO. |
+| **Juan José Osorio** | Documentación | Elaboración de documentos técnicos. |
 
 ---
 
@@ -47,8 +166,8 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 - 🗓️ **Inicio del proyecto:** 5 de septiembre de 2025  
 - 🗓️ **Entrega final:** 28 de noviembre de 2025  
-- 💬 **Reuniones semanales:** Todos los **jueves** (coordinación de avances)  
-- 🧑‍🏫 **Sesiones de trabajo en clase:** Todos los **viernes**
+- 💬 **Reuniones semanales:** Jueves (seguimiento de avances)  
+- 🧑‍🏫 **Sesiones de trabajo en clase:** Viernes  
 
 ---
 
@@ -56,49 +175,31 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 | Fase | Fecha | Actividades principales |
 |------|--------|--------------------------|
-| **1. Análisis y Requerimientos** | 05 - 15 septiembre | Levantamiento de requerimientos, historias de usuario, casos de uso. |
-| **2. Diseño del Sistema** | 16 - 30 septiembre | Diagramas UML (casos de uso, clases, flujo), planificación del hardware. |
-| **3. Compra y Ensamble de Materiales** | 01 - 15 octubre | Adquisición de ESP32, sensores, motores y montaje inicial. |
-| **4. Desarrollo del Código** | 16 - 31 octubre | Programación del ESP32, conexión con Adafruit IO, pruebas unitarias. |
-| **5. Pruebas y Validación** | 01 - 20 noviembre | Pruebas integrales del sistema y ajustes. |
-| **6. Entrega Final y Presentación** | 21 - 28 noviembre | Documentación completa, video de funcionamiento y entrega final. |
-
----
-
-## 🚀 Tecnologías y Herramientas
-
-| Tipo | Tecnología / Herramienta |
-|------|--------------------------|
-| Microcontrolador | ESP32 |
-| Lenguaje de programación | C (PlatformIO / Visual Studio Code) |
-| IDE | Visual Studio Code con extensión PlatformIO |
-| Comunicación IoT | MQTT - Adafruit IO |
-| Sensor | LDR (sensor de luz) |
-| Actuador | Motor DC + módulo de control |
-| Control manual | Botones físicos |
-| Control remoto | Dashboard en Adafruit IO |
-| Control de versiones | Git / GitHub |
-| Diagramas | Draw.io / Lucidchart |
-| Documentación | Markdown / PDF |
+| **1. Análisis y Requerimientos** | 05 - 15 septiembre | Requerimientos, historias de usuario, casos de uso. |
+| **2. Diseño del Sistema** | 16 - 30 septiembre | Diagramas UML, planificación del hardware. |
+| **3. Compra y Ensamble** | 01 - 15 octubre | Materiales, montaje inicial, pruebas. |
+| **4. Desarrollo del Código** | 16 - 31 octubre | Control ESP32, integración IoT, pruebas unitarias. |
+| **5. Pruebas y Validación** | 01 - 20 noviembre | Pruebas integrales y ajustes. |
+| **6. Entrega Final** | 21 - 28 noviembre | Documentación final y video demo. |
 
 ---
 
 ## 📜 Historias de Usuario Iniciales
 
 **HU-01:**  
-> *Como usuario, quiero abrir las persianas manualmente desde el panel web, para controlar la iluminación sin depender del modo automático.*
+> Como usuario, quiero abrir y cerrar las persianas manualmente desde el panel web, para controlar la iluminación sin depender del modo automático.
 
 **HU-02:**  
-> *Como usuario, quiero que las persianas se cierren automáticamente cuando haya poca luz, para mantener privacidad y confort.*
+> Como usuario, quiero que las persianas se abran al amanecer y se cierren al anochecer, para automatizar el control diario.
 
 **HU-03:**  
-> *Como administrador, quiero visualizar el estado actual de las persianas y el nivel de luz, para monitorear el sistema.*
+> Como administrador, quiero visualizar el estado de la persiana y el nivel de luz, para monitorear el sistema.
 
 **HU-04:**  
-> *Como usuario, quiero programar horarios de apertura y cierre, para automatizar el control diario de las persianas.*
+> Como usuario, quiero detener la persiana en cualquier momento, para ajustarla según mi necesidad.
 
 **HU-05:**  
-> *Como usuario, quiero recibir notificaciones si hay un fallo en el sensor o motor, para poder intervenir rápidamente.*
+> Como usuario, quiero que el sistema respete los finales de carrera, para evitar daños mecánicos.
 
 ---
 
@@ -106,53 +207,30 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 | Rol | Nombre | Funciones |
 |------|--------|-----------|
-| 🧭 **Product Owner (PO)** | María Daniela Jiménez | Define los requerimientos, valida entregas y coordina el equipo. |
-| ⚙️ **Scrum Master (SM)** | Katherine Cardona | Facilita reuniones, garantiza cumplimiento de metodología. |
-| 💻 **Development Team (Dev Team)** | Brandon Bueno y Juan José Osorio | Desarrollan, prueban y documentan el sistema físico y lógico. |
+| 🧭 **Product Owner (PO)** | María Daniela Jiménez | Define requerimientos, valida entregas y coordina el equipo. |
+| ⚙️ **Scrum Master (SM)** | Katherine Cardona | Facilita reuniones y seguimiento del proceso. |
+| 💻 **Dev Team** | Brandon Bueno y Juan José Osorio | Desarrollo, pruebas y documentación del sistema. |
 
 ---
 
 ## ✅ Definition of Ready (DoR)
 
-Una historia está **lista para desarrollarse** cuando:
-- Tiene una descripción clara (formato “Como [rol], quiero [acción], para [beneficio]”).
-- Se han definido los criterios de aceptación.
-- Está priorizada en el tablero del proyecto.
+Una historia está lista para desarrollarse cuando:
+- Tiene descripción clara (Como [rol], quiero [acción], para [beneficio]).
+- Se definieron criterios de aceptación.
+- Está priorizada.
 - No depende de otra historia pendiente.
 
 ---
 
 ## 🧩 Definition of Done (DoD)
 
-Una historia está **completamente terminada** cuando:
-- El código ha sido implementado y probado en el ESP32.
+Una historia está terminada cuando:
+- El código está implementado y probado en ESP32.
 - La funcionalidad está verificada en Adafruit IO.
-- El commit y push fueron realizados correctamente.
-- La documentación se actualizó en.........
-- El equipo aprobó la historia en revisión.
-
----
-
-## 🧱 Estructura de Issues y Tareas del Proyecto
-
-**Fase 1: Análisis y Diseño**
-- TASK-01: Identificación de requerimientos
-- TASK-02: Elaboración de casos de uso
-- TASK-03: Diseño del diagrama de clases
-- TASK-04: Documentación inicial del proyecto
-
-**Fase 2: Desarrollo del Sistema**
-- HU-01: Control manual desde Adafruit IO  
-- HU-02: Control automático por sensor de luz  
-- HU-03: Notificación de fallos  
-- TECH-01: Programación del ESP32  
-- TECH-02: Integración con Adafruit IO  
-- TECH-03: Comunicación MQTT  
-
-**Fase 3: Pruebas y Entrega**
-- TEST-01: Pruebas de hardware  
-- TEST-02: Validación de conexión IoT  
-- TEST-03: Ajustes finales y presentación  
+- Se realizó commit y push.
+- La documentación se actualizó (README + docs/).
+- El equipo aprobó la historia.
 
 ---
 
@@ -164,17 +242,22 @@ Una historia está **completamente terminada** cuando:
 - 🧠 **Diagrama de Clases:** [/Documentos/Analisis/DiagramaDeClases.drawio](https://lucid.app/lucidchart/93453029-d999-42b9-aec2-85431b73eb32/edit?viewport_loc=-2932%2C-861%2C4092%2C1872%2C0_0&invitationId=inv_52cca74a-0cbc-42f3-8211-74e5729efa3b)  
 - 🔌 **Código Fuente:** `/Aplicacion/`  
 - 🧾 **Historias de Usuario:** `/Documentos/Analisis/HistoriasDeUsuario.pdf`
+- 📸 **Evidencias:** `media/`
+- 📎 **Esquemático:** `diagrams/`
 
 ---
 
 ## 📈 Estado Actual del Proyecto
-🟢 *On Track*  
-> El proyecto se encuentra en fase de **desarrollo del código y conexión IoT**, con avance continuo en los diagramas, documentación y despues pruebas iniciales del prototipo físico.
+
+🟢 **Funcional y documentado**  
+> El proyecto cuenta con control manual, automático por eventos de luz y control IoT mediante Adafruit IO, con evidencias de montaje, pruebas y documentación técnica.
 
 ---
 
 ## 🧾 Licencia
-Este proyecto es de uso académico. Universidad del Valle – Asignatura: *Metodologías de Desarrollo de Software..*
+
+Este proyecto es de uso académico.  
+Universidad del Valle – Asignatura: *Metodologías de Desarrollo de Software*.
 
 ---
 
