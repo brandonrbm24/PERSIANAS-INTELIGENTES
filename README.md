@@ -106,7 +106,7 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 📸 Evidencias:
 - `media/circuito_pruebas.jpg`
-- `media/montaje_protoboard.jpg`
+
 
 ### 2️⃣ Control manual
 - Programación del control por botones (SUBIR/BAJAR) con paro por finales de carrera.
@@ -147,6 +147,7 @@ Desarrollar un sistema automatizado de control de persianas basado en **ESP32** 
 
 📌 Recomendación de dashboard:
 - 3 botones tipo **Momentary Button**: SUBIR / BAJAR / STOP
+- `<img width="848" height="433" alt="Captura de pantalla 2025-12-11 235457" src="https://github.com/user-attachments/assets/02da1caf-4fd2-4aec-8057-802c94af7227" />`
 
 ---
 
