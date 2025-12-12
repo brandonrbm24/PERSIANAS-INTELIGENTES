@@ -236,12 +236,11 @@ Una historia está terminada cuando:
 
 ## 🔗 Enlaces Importantes
 
-  
 - 🧩 **Casos de Uso:** [/Documentos/Analisis/CasosDeUso.pdf`](https://github.com/brandonrbm24/PERSIANAS-INTELIGENTES/blob/main/Casos_de_Uso_Persianas.pdf)
 - 🤖 **diagrama de estados:** https://github.com/brandonrbm24/PERSIANAS-INTELIGENTES/blob/main/DIAGRAMA%20DE%20ESTADO.docx
 - 🧠 **Diagrama de Clases:** [/Documentos/Analisis/DiagramaDeClases.drawio](https://lucid.app/lucidchart/93453029-d999-42b9-aec2-85431b73eb32/edit?viewport_loc=-2932%2C-861%2C4092%2C1872%2C0_0&invitationId=inv_52cca74a-0cbc-42f3-8211-74e5729efa3b)  
-- 🔌 **Código Fuente:** `/Aplicacion/`  
-- 🧾 **Historias de Usuario:** `/Documentos/Analisis/HistoriasDeUsuario.pdf`
+- 🔌 **Código Fuente:** `src/`
+- 🧾 **Historias de Usuario:** (agrega aquí tu link final)
 - 📸 **Evidencias:** `media/`
 - 📎 **Esquemático:** `diagrams/`
 
